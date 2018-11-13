@@ -1,0 +1,11 @@
+ #####By Alisha Q. 11/13/2018#####
+ #Install or load sratoolkit
+ 
+ fastq-dump --skip-technical --readids --read-filter pass --dumpbase --split-files SRR7535529 &
+ 
+ #Files should begin downloading immediately. The time varies A LOT by the number of reads you are downloading. 
+ #--skip-technical = Technical reads (if present) will be removed. 
+ # --readids = Adds name of accession to readids, so that you know which library they belong to.
+ #--read-filter pass = Only keep reads which have passed the (very minimal) Illumina flagging for low quality
+ #--dumpbase = Only use ATGCN as valid bases.
+ #The ampersand allows you to run in the background. 
