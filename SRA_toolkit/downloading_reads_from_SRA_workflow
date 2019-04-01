@@ -1,7 +1,7 @@
  #####By Alisha Q. 11/13/2018#####
  #Install or load sratoolkit
  
- fastq-dump --skip-technical --readids --read-filter pass --dumpbase --split-files SRR7535529 &
+ fastq-dump --skip-technical --readids --read-filter pass --dumpbase --split-files --clip SRR7535529 &
  
  #Files should begin downloading immediately. The time varies A LOT by the number of reads you are downloading. 
  #--skip-technical = Technical reads (if present) will be removed. 
