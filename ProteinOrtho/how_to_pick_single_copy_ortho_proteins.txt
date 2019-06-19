@@ -1,4 +1,4 @@
-##########Alisha Quandt##########Updated 6/19/19
+#####C. Alisha Quandt#####Updated 6/19/19
 
 # 1. Run Proteinortho:
 
@@ -6,8 +6,7 @@
 
 source ~/.funrc
 
-
-
+proteinortho 
 
 #This analysis only had 18 taxa and I used 8 cores. It finished in 15 minutes.
 
