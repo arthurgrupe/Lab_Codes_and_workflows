@@ -1,1 +1,34 @@
+##########Alisha Quandt##########Updated 6/19/19
 
+# 1. Run Proteinortho:
+
+#Load funannotate environment. 
+
+source ~/.funrc
+
+
+
+
+#This analysis only had 18 taxa and I used 8 cores. It finished in 15 minutes.
+
+# 2. Reformat output to capture only results of single copy orthogroups. 
+
+grep $'^N\tN' yourname.proteinortho.tsv > single_copy_proteinortho.tsv
+
+# Where N = the number of genomes in your analysis.
+
+# 3. Extract said proteins from the individual fasta files.
+
+proteinortho_grab_proteins.pl -tofiles single_copy_proteinortho.tsv fastas/*.fas
+
+#Notes: This script will only be available to you if you have loaded the funannotate environment.
+#       This is assuming all the fasta files that went into your proteinortho analysis are in a directory called "fastas",
+#       AND it assumes that all your input fastas end in the extension ".fas". 
+#       If you didn't do this before the analysis, change all fasta names to have the same suffix.
+#       This takes forever, but I ran it on the command line. For bigger (~50-100 genome analyses) should make a slurm.
+
+#Your output should be individual files equal to the number of single copy orthogroups. They are named like this:
+
+OrthoGroup##.fas
+
+#You are now ready to move on to alignment and other steps of Tree Construction.
