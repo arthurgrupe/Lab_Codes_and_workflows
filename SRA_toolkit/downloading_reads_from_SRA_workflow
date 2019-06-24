@@ -1,8 +1,16 @@
- #####By Alisha Q.#####Updated 06/18/2019
+ #####By Alisha Q.#####Updated 06/24/2019
  #####Fasterq-dump########
  #Install or load sratoolkit v2.9.1 or higher, I used 2.9.6
- 
+ Option 1:
  fasterq-dump --skip-technical SRR7535523 -e 8
+ 
+ Option 2:
+ fasterq-dump --skip-technical SRR7535523 -e 8 -O /scratch/user/My_download/
  
  #Files should begin downloading immediately. The time varies A LOT by the number of reads you are downloading.
  #--skip-technical = Technical reads (if present) will be removed. 
+ #-e = number of threads to use
+ #-O = Output directory to be created by program and filled with final output files
+ 
+ #Option 2 will write the temporary files to the directory from which the command is run. For some larger SRA files it is necessary that the program runs in a separate storage device than where the final output files are written.
+ #Use Option 1, unless it doesn't work (it will say it's running out of I/O), then switch to option 2. 
