@@ -6,7 +6,7 @@
 
 source ~/.funrc
 
-proteinortho 
+proteinortho -keep -clean -project=crypto -cpus=8 genome1.fas genome2.fas genome3.fas...
 
 #This analysis only had 18 taxa and I used 8 cores. It finished in 15 minutes.
 
