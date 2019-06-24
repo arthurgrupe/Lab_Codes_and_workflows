@@ -32,7 +32,7 @@ NODE_458_length_7907_cov_59.2615	3
 
 #Note, the "key" to these annotation (e.g.taxonomy for 1,10,3) is kept in the spreadsheet where this work was done - not in the esom input file.
 
-1. Generate input files for ESOM.
+2. Generate input files for ESOM.
 
 perl print_tetramer_freqs_esom.pl -s your_genome_assembly.fasta -m 1000 -w 3000 -k 4 -a your_metagenome.annotation
 
@@ -43,11 +43,11 @@ perl print_tetramer_freqs_esom.pl -s your_genome_assembly.fasta -m 1000 -w 3000 
 #a = annotation file (tab delimited plain text) you generated (either from Blast taxonomy report as above, or other info e.g. coverage, RNASeq data)
 NOTE: you may need to type out full path for this perl script to work if not in same directory.
 
-Output, 4 files: .lrn, .names, .cls, .annotation files within your directory.
+Output, 4 files: .lrn, .names, .cls, .annotation files within your directory. Copy these to the Mac.
 
 On a Mac, install the GUI from here: http://databionic-esom.sourceforge.net/
 
-2. Load files into ESOM gui.
+3. Load files into ESOM gui.
 
 File -> load .lrn, then load .names, then load .cls
 
@@ -63,17 +63,11 @@ Hit start - training will take minutes to hours (more common) depending on the s
 3. Vizualize output
 
 View -> UMatrix background, tiled display.
-#Use Zoom, Color, Bestmatch size to get desired view.
+#Use Zoom, Color, Bestmatch size to get your desired view.
 
 *****At this point only your ridges and valleys and the overall structure of your data will be displayed.*****
-NOW, we can play around with adding information (annotating, if you will) those contigs (windows) that are displayed on your map.
+#NOW, we can play around with adding information (annotating, if you will) those contigs (windows) that are displayed on your map.
 
-Back to the command line: 
- Depending on how old your blast database is, you may (or may not, if it's the newest version of genbank db) be able to us this helpful script (included in directory):
+File -> load .annotation
 
-perl blast_taxonomy_report.pl -blast contigs_nr.1e-8.txt -nodes nodes.dmp -names names.dmp -gi_taxid_file gi_taxid_nucl.dmp.gz
-#Download the nodes.dmp, names.dmp, and gi_taxid_nucl.dmp.gz from Genbank's ftp site here: ftp://ftp.ncbi.nlm.nih.gov/pub/taxonomy/
-#Files are too big for me to upload to GitHub.
-
-
-Now load the reulting new files into the ESOM GUI.
+#You should now be able to see the annotation colors mapped onto the ESOM, you can click different numbers (annotations) to display at a given time.
