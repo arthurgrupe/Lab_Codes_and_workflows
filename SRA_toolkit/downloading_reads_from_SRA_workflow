@@ -1,8 +1,8 @@
- #####By Alisha Q.#####Updated 06/24/2019
- #####Fasterq-dump########
+ ##### By Alisha Q. #####Updated 06/24/2019
+ ##### Fasterq-dump ########
  #Install or load sratoolkit v2.9.1 or higher, I used 2.9.6
  Option 1:
- **fasterq-dump --skip-technical SRR7535523 -e 8**
+ fasterq-dump --skip-technical SRR7535523 -e 8
  
  Option 2:
  fasterq-dump --skip-technical SRR7535523 -e 8 -O /scratch/user/My_download/
