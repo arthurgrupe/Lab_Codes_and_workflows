@@ -1,4 +1,4 @@
-#####C. Alisha Quandt#####Updated 6/19/19
+****C. Alisha Quandt**** #Updated 6/24/19
 
 # 1. Run Proteinortho:
 
@@ -16,7 +16,7 @@ grep $'^N\tN' yourname.proteinortho.tsv > single_copy_proteinortho.tsv
 
 # Where N = the number of genomes in your analysis.
 
-# 3. Extract said proteins from the individual fasta files.
+# 3. Extract said proteins from the individual fasta files. #This STILL isn't working for me and I don't know why#
 
 proteinortho_grab_proteins.pl -tofiles single_copy_proteinortho.tsv fastas/*.fas
 
