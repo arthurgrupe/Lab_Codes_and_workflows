@@ -1,0 +1,79 @@
+isualize your data - create an emergent self organizing map (ESOM).
+#Modified and emended from the work out of Jill Banfield's lab. Greg Dick et al. 2009 Genome Biology. And Vincent Denef's version of the print_tetramer_freqs.pl perl script has been used.
+#Example files and necessary scripts included in this folder as well (.lrn file was too big, so I had to gzip it!).
+
+On the command line:
+1. Using blastn or USEARCH, an algorithm, and Genbank nt or similar, a database, create a best blast hit for each contig. Use tabular format (6) for blast output.
+#Talk about quick and dirty. Your best blastn hit could be spurious or as equally likely as the second or fourth best blastn hit, but in aggregate, we try to separate the data. For bacteria, this actually works quite well, for Eukaryotes the databases are sparser and therefore we give a best blastn hit less meaning. A top hit to ANY fungus is usually a definite for our targets, a top hit to animals (especially inverts) could still be fungal target though. I see this frequently.
+
+#Now we have to "assign the taxonomy" based on this best blast hit.
+#Tina add BLAST parameters and example command for running Kevin's method of taxonomy report extraction.
+
+In a spreadsheet:
+
+With this output, we need to reformat to the "annotation" format taken by ESOM, and bin things into and save it as a plain text file.  
+
+#Here is an example of the top few lines of the annotation file, your_metagenome.annotation:
+contig  annotation
+NODE_1147_length_2667_cov_16.2489	10
+NODE_707_length_4433_cov_14.0962	10
+NODE_329_length_11939_cov_66.1998	1
+NODE_326_length_12118_cov_62.7537	1
+NODE_2533_length_1171_cov_47.2948	1
+NODE_1903_length_1542_cov_12.076	10
+NODE_1518_length_1955_cov_17.2579	10
+NODE_989_length_3135_cov_14.3055	10
+NODE_1005_length_3078_cov_17.2253	10
+NODE_988_length_3137_cov_10.7748	10
+NODE_1225_length_2482_cov_16.2073	10
+NODE_867_length_3613_cov_15.5486	10
+NODE_1675_length_1764_cov_10.7923	10
+NODE_458_length_7907_cov_59.2615	3
+
+#Note, the "key" to these annotation (e.g.taxonomy for 1,10,3) is kept in the spreadsheet where this work was done - not in the esom input file.
+
+1. Generate input files for ESOM.
+
+perl print_tetramer_freqs_esom.pl -s your_genome_assembly.fasta -m 1000 -w 3000 -k 4 -a your_metagenome.annotation
+
+#s = your assembly
+#m = minimum contig size to be analyzed (make this higher for faster/ less CPU intensive visualization)
+#w = window size to calculate kmer frequency (again, make this higher for faster viz)
+#k = kmer size, default is 4, longer means slower!
+#a = annotation file (tab delimited plain text) you generated (either from Blast taxonomy report as above, or other info e.g. coverage, RNASeq data)
+NOTE: you may need to type out full path for this perl script to work if not in same directory.
+
+Output, 4 files: .lrn, .names, .cls, .annotation files within your directory.
+
+On a Mac, install the GUI from here: http://databionic-esom.sourceforge.net/
+
+2. Load files into ESOM gui.
+
+File -> load .lrn, then load .names, then load .cls
+
+Tools -> training.  I use default options, except: 
+   Training algorithm - K-batch
+   Number of rows in map - 200
+   Number of cols in map - 250 (product of rows x cols should be approximately 5-6x the # of windows, e.g. I have a 30,000,000 bp assembly, divide by 3000 [size of window] ) ****If ESOM training is taking too long to run (e.g. more than 24 hours), make these row and col values smaller to help out, or go back to the change the min contig or window size parameters.
+   Start value for the radius - 50
+   Number of epochs - 20
+
+Hit start - training will take minutes to hours (more common) depending on the size of your dataset.
+
+3. Vizualize output
+
+View -> UMatrix background, tiled display.
+#Use Zoom, Color, Bestmatch size to get desired view.
+
+*****At this point only your ridges and valleys and the overall structure of your data will be displayed.*****
+NOW, we can play around with adding information (annotating, if you will) those contigs (windows) that are displayed on your map.
+
+Back to the command line: 
+ Depending on how old your blast database is, you may (or may not, if it's the newest version of genbank db) be able to us this helpful script (included in directory):
+
+perl blast_taxonomy_report.pl -blast contigs_nr.1e-8.txt -nodes nodes.dmp -names names.dmp -gi_taxid_file gi_taxid_nucl.dmp.gz
+#Download the nodes.dmp, names.dmp, and gi_taxid_nucl.dmp.gz from Genbank's ftp site here: ftp://ftp.ncbi.nlm.nih.gov/pub/taxonomy/
+#Files are too big for me to upload to GitHub.
+
+
+Now load the reulting new files into the ESOM GUI.
