@@ -60,7 +60,7 @@ Tools -> training.  I use default options, except:
 
 Hit start - training will take minutes to hours (more common) depending on the size of your dataset.
 
-3. Vizualize output
+4. Vizualize output
 
 View -> UMatrix background, tiled display.
 #Use Zoom, Color, Bestmatch size to get your desired view.
