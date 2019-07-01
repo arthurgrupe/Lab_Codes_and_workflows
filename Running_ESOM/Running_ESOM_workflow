@@ -65,9 +65,20 @@ Hit start - training will take minutes to hours (more common) depending on the s
 View -> UMatrix background, tiled display.
 #Use Zoom, Color, Bestmatch size to get your desired view.
 
-*****At this point only your ridges and valleys and the overall structure of your data will be displayed.*****
+*****At this point only your ridges and valleys and the overall structure of your data will be displayed.***** 
 #NOW, we can play around with adding information (annotating, if you will) those contigs (windows) that are displayed on your map.
+ A. Check "Draw Best Matches" in View pane.
 
-File -> load .annotation
+ B. File -> load .cls
+ 
+ C. Under "Classes" tab, select classes you are interested in viewing so that they "light up" on the map.
+ 
+ D. Once you have identified your target genome, select the "Data" tab. Then, left click around the target area of the map. 
+ 
+ E. When you have enclosed all of the target area of the map, right click to select that target area. Note: this will only work correctly if you have selected the "Data" tab prior to beginning.
+ 
+ F. File, Selection, save as .cls. Name your selected .cls file to save to your folder. 
+ 
+5. Obtain your target contigs using Getclassfasta.pl
 
 #You should now be able to see the annotation colors mapped onto the ESOM, you can click different numbers (annotations) to display at a given time.
