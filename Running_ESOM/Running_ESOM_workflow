@@ -81,4 +81,7 @@ View -> UMatrix background, tiled display.
  
 5. Obtain your target contigs using Getclassfasta.pl
 
-#You should now be able to see the annotation colors mapped onto the ESOM, you can click different numbers (annotations) to display at a given time.
+perl Getclassfasta.pl -fasta your_genome_assembly.fasta -names your_genome_assembly.names -num 1 -loyal 75 -cls your_target_from_esom.cls
+
+#You will now have a .fasta (your new target genome assembly), and a .conf output files. The .conf tells you the confidence at which any given contig was placed within the target genome assembly.
+#Congratulations, you can now move on with genome annotation.
