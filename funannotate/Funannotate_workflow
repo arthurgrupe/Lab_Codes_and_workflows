@@ -1,5 +1,7 @@
 ########C. Alisha Quandt######### Updated 7/1/2019
-#First source the Funannotate environment
+#Further options and explanation can be found here: https://funannotate.readthedocs.io/en/latest/index.html
+
+#First, source the Funannotate environment
 
 source ~/.funrc
 
