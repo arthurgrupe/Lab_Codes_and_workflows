@@ -1,0 +1,32 @@
+########C. Alisha Quandt######### Updated 7/1/2019
+#First source the Funannotate environment
+
+source ~/.funrc
+
+1.  Sort
+
+funannotate sort -i your_assembly.fas -o sorted_clean.fas -b Micruf (--minlen 500)
+
+#   -i your genome assembly
+#   -o name of output file
+#   -b base name to give your contigs
+#   --minlen minimum length of contig to keep in assembly, optional
+
+2. Mask
+
+funannotate mask -i sorted_clean.fas -o masked_sorted_cleaned.fas -s fungi --cpus 1
+
+#   -i your output from sorting
+#   -o name of output file
+#   -s organism to tell repeatmasker
+#   --cpus number of cpus to use, default is 2
+
+3. Predict
+
+funannotate predict -i masked_sorted_cleaned.fas --species "Botrytis cinerea" --protein_evidence Leotio_prots.fas -o Output_Folder
+
+#   -i your output from Masking
+#   --species model species for Augustus
+#   --protein_evidence concatenated fasta file containing proteins from related taxa
+#   -o name of output directory
+
