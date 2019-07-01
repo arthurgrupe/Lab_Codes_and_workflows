@@ -60,7 +60,7 @@ Tools -> training.  I use default options, except:
 
 Hit start - training will take minutes to hours (more common) depending on the size of your dataset.
 
-4. Vizualize output
+4. Vizualize output and identify target genome
 
 View -> UMatrix background, tiled display.
 #Use Zoom, Color, Bestmatch size to get your desired view.
@@ -85,3 +85,5 @@ perl Getclassfasta.pl -fasta your_genome_assembly.fasta -names your_genome_assem
 
 #You will now have a .fasta (your new target genome assembly), and a .conf output files. The .conf tells you the confidence at which any given contig was placed within the target genome assembly.
 #Congratulations, you can now move on with genome annotation.
+
+
