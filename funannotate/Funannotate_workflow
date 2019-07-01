@@ -25,10 +25,11 @@ funannotate mask -i sorted_clean.fas -o masked_sorted_cleaned.fas -s fungi --cpu
 
 3. Predict
 
-funannotate predict -i masked_sorted_cleaned.fas --species "Botrytis cinerea" --protein_evidence Leotio_prots.fas -o Output_Folder
+funannotate predict -i masked_sorted_cleaned.fas --species "Botrytis cinerea" --name MICRUF_ --protein_evidence Leotio_prots.fas --cpus 24 -o Output_Folder
 
 #   -i your output from Masking
 #   --species model species for Augustus
 #   --protein_evidence concatenated fasta file containing proteins from related taxa
 #   -o name of output directory
+#   --cpus number of cpus to use
 
