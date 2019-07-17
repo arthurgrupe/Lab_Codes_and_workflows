@@ -7,15 +7,22 @@ cat Micruf.fas | sed 's/>g/>Micruf|g/g' > Micruf.names.fas
 #For Funannotate/Maker proteins:
 cat Nagfri_prots.fas | sed 's/>NAGFRI_/>NAGFRI|g/g' > Nagfri.names.fas
 
-2. Run muscle on all files using Load Balancer:
+2. Run Proteinortho6
+
+
+3. Get single copy, shared orthologous clusters
 
 
 
-3. Run trimal using Load Balancer:
+4. Run muscle on all files using Load Balancer:
 
 
 
-4. Create expected file:
+5. Run trimal using Load Balancer:
+
+
+
+6. Create expected file:
 cat trimmed/*.fasta.out.trim | grep "^>" | tr "|" "\t" | cut -f 1 | sort | uniq > expected.txt
 
 head expected.txt
@@ -30,4 +37,4 @@ head expected.txt
 >Cadsp
 >Calmar
 
-5. Now, concatenate your aligned files:
+7. Now, concatenate your aligned files:
