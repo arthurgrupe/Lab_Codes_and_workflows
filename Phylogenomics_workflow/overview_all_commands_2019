@@ -43,3 +43,15 @@ head expected.txt
 >Calmar
 
 7. Now, concatenate your aligned files:
+perl ./combine_fasaln_v2019.pl -o allseqs.fas -of fasta -d ./trimmed/ --expected expected.txt
+
+###Make new directory, move alignment to that directory
+mkdir raxml
+mv allseqs.fas raxml/.
+cd raxml/
+
+8. Run RAxML:
+#Adjust number of cpus per task, based on size of alignment. My biggest alignment so far (42 taxa, 1271 loci) took 3 cpus per task, otherwise raxml runs out of memory.
+
+sbatch ntasks_slurm_raxml.sh
+
