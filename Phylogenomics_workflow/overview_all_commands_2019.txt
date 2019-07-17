@@ -1,0 +1,19 @@
+#Run trimal using Load Balancer:
+
+
+# Create expected file:
+cat trimmed/*.fasta.out.trim | grep "^>" | tr "|" "\t" | cut -f 1 | sort | uniq > expected.txt
+
+head expected.txt
+>Acema
+>Amore
+>Amyenc
+>Ascsa
+>Bissp
+>Blugr
+>Botci
+>Bulin
+>Cadsp
+>Calmar
+
+#Now, concatenate your aligned files:
