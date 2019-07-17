@@ -13,7 +13,7 @@
 # 4. Create expected file:
 cat trimmed/*.fasta.out.trim | grep "^>" | tr "|" "\t" | cut -f 1 | sort | uniq > expected.txt
 
-"head expected.txt
+head expected.txt
 >Acema
 >Amore
 >Amyenc
@@ -23,6 +23,6 @@ cat trimmed/*.fasta.out.trim | grep "^>" | tr "|" "\t" | cut -f 1 | sort | uniq 
 >Botci
 >Bulin
 >Cadsp
->Calmar"
+>Calmar
 
 # 5. Now, concatenate your aligned files:
