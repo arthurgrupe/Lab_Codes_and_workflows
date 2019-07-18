@@ -2,10 +2,13 @@
 
 #For JGI files:
 cat Amyenc.fas | sed 's/jgi|//g' | sed 's/|/_/g' | sed 's/Amyenc1_/Amyenc|/g' > Amyenc.names.fas
+
 #For Augustus proteins:
 cat Micruf.fas | sed 's/>g/>Micruf|g/g' > Micruf.names.fas
+
 #For Funannotate/Maker proteins:
 cat Nagfri_prots.fas | sed 's/>NAGFRI_/>NAGFRI|g/g' > Nagfri.names.fas
+
 #For NCBI-Genbank, where POR is the 3 letter accession. You may want to remove all commas too - add sed 's/,//g'
 cat Tolpar.fas | sed 's/ \[Tolypocladium paradoxum\]//g' | sed 's/POR/Tolpar|POR/g' | sed 's/ /_/g' > Tolpar.names.fas
 
@@ -24,6 +27,10 @@ grep $'^18\t18' protortho_output.tsv > all_42.tsv
 
 #Then
 perl ./proteinortho_grab_proteins.pl -exact -tofiles new_all_18_header.tsv Botbo.fas Calvi.fas Ustsp.fas Trias.fas Ustma.fas Treen.fas Triol.fas Treme.fas Kocim.fas CryneoH99.fas Walse.fas Malglo.fas Nagfri.fas Kwonbest.fas Kwondej.fas Kwonhev.fas Cryamy.fas Crygat.fas
+
+#Your output should be individual files equal to the number of single copy orthogroups. They are named like this:
+
+OrthoGroup###.fas
 
 4. Run muscle on all files using Load Balancer:
 #Create lb file
