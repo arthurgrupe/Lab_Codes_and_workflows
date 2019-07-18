@@ -16,10 +16,14 @@ cd Goodnames/
 
 2. Run Proteinortho6
 
+sbatch Clean_install_protortho_slurm.sh
 
 3. Get single copy, shared orthologous clusters
+#Parse proteiortho output file (.tsv) to have only the clusters you want. Easiest way - if you had 18 input proteomes:
+grep $'^18\t18' protortho_output.tsv > all_42.tsv
 
-
+#Then
+perl ./proteinortho_grab_proteins.pl -exact -tofiles new_all_18_header.tsv Botbo.fas Calvi.fas Ustsp.fas Trias.fas Ustma.fas Treen.fas Triol.fas Treme.fas Kocim.fas CryneoH99.fas Walse.fas Malglo.fas Nagfri.fas Kwonbest.fas Kwondej.fas Kwonhev.fas Cryamy.fas Crygat.fas
 
 4. Run muscle on all files using Load Balancer:
 #Create lb file
