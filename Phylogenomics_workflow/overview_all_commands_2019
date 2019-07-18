@@ -20,12 +20,23 @@ cd Goodnames/
 
 
 4. Run muscle on all files using Load Balancer:
+#Create lb file
+./new_create_muscle.sh > lb_cmd_file
 
+#Prepare and run your slurm
+sbatch LB_muscle_slurm.sh
 
+####Move .out files to new directory
+mkdir muscleout
+mv *.out muscleout/.
+cd muscleout/
 
 5. Run trimal using Load Balancer:
+#Create lb file
+./create_TrimAL.sh > lb_cmd_trimal
 
-
+#Prepare and run your slurm
+sbatch LB_trimal_slurm.sh
 
 6. Create expected file:
 cat trimmed/*.fasta.out.trim | grep "^>" | tr "|" "\t" | cut -f 1 | sort | uniq > expected.txt
