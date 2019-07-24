@@ -12,6 +12,16 @@ cat Nagfri_prots.fas | sed 's/>NAGFRI_/>NAGFRI|g/g' > Nagfri.names.fas
 #For NCBI-Genbank, where POR is the 3 letter accession. You may want to remove all commas too - add sed 's/,//g'
 cat Tolpar.fas | sed 's/ \[Tolypocladium paradoxum\]//g' | sed 's/POR/Tolpar|POR/g' | sed 's/ /_/g' > Tolpar.names.fas
 
+#Example output of headers in reformatted file:
+
+cat Tolpar.names.fas | grep \>
+
+#>Tolpar|POR39802.1_Uncharacterized_protein_TPAR_00008
+#>Tolpar|POR39803.1_putative_PGM2-phosphoglucomutase,_major_isoform
+#>Tolpar|POR39804.1_Uncharacterized_protein_TPAR_00024
+#>Tolpar|POR39805.1_MFS-type_transporter
+#>Tolpar|POR39806.1_Uncharacterized_protein_TPAR_00026,_partial
+
 ####Move new files to new directory
 mkdir GoodNames
 mv *.names.fas Goodnames/
@@ -23,10 +33,10 @@ sbatch Clean_install_protortho_slurm.sh
 
 3. Get single copy, shared orthologous clusters
 #Parse proteiortho output file (.tsv) to have only the clusters you want. Easiest way - if you had 18 input proteomes:
-grep $'^18\t18' protortho_output.tsv > all_42.tsv
+grep $'^18\t18' protortho_output.tsv > new_all_18.tsv
 
 #Then
-perl ./src_proteinortho_grab_proteins.pl -exact -tofiles new_all_18_header.tsv Botbo.fas Calvi.fas Ustsp.fas Trias.fas Ustma.fas Treen.fas Triol.fas Treme.fas Kocim.fas CryneoH99.fas Walse.fas Malglo.fas Nagfri.fas Kwonbest.fas Kwondej.fas Kwonhev.fas Cryamy.fas Crygat.fas
+perl ./src_proteinortho_grab_proteins.pl -exact -tofiles new_all_18.tsv Botbo.fas Calvi.fas Ustsp.fas Trias.fas Ustma.fas Treen.fas Triol.fas Treme.fas Kocim.fas CryneoH99.fas Walse.fas Malglo.fas Nagfri.fas Kwonbest.fas Kwondej.fas Kwonhev.fas Cryamy.fas Crygat.fas
 
 #IF this starts to take to long running on command line, then use poh_grab_prots_slurm.sh to run via the queue. Longest it took me was ~5 hours.
 #Your output should be individual files equal to the number of single copy orthogroups. They are named like this:
