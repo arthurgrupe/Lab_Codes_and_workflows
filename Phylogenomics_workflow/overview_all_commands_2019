@@ -26,8 +26,9 @@ sbatch Clean_install_protortho_slurm.sh
 grep $'^18\t18' protortho_output.tsv > all_42.tsv
 
 #Then
-perl ./proteinortho_grab_proteins.pl -exact -tofiles new_all_18_header.tsv Botbo.fas Calvi.fas Ustsp.fas Trias.fas Ustma.fas Treen.fas Triol.fas Treme.fas Kocim.fas CryneoH99.fas Walse.fas Malglo.fas Nagfri.fas Kwonbest.fas Kwondej.fas Kwonhev.fas Cryamy.fas Crygat.fas
+perl ./src_proteinortho_grab_proteins.pl -exact -tofiles new_all_18_header.tsv Botbo.fas Calvi.fas Ustsp.fas Trias.fas Ustma.fas Treen.fas Triol.fas Treme.fas Kocim.fas CryneoH99.fas Walse.fas Malglo.fas Nagfri.fas Kwonbest.fas Kwondej.fas Kwonhev.fas Cryamy.fas Crygat.fas
 
+#IF this starts to take to long running on command line, then use poh_grab_prots_slurm.sh to run via the queue. Longest it took me was ~5 hours.
 #Your output should be individual files equal to the number of single copy orthogroups. They are named like this:
 
 OrthoGroup###.fas
