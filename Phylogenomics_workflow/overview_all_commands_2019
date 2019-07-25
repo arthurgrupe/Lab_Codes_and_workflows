@@ -10,7 +10,7 @@ cat Micruf.fas | sed 's/>g/>Micruf|g/g' > Micruf.names.fas
 cat Nagfri_prots.fas | sed 's/>NAGFRI_/>NAGFRI|g/g' > Nagfri.names.fas
 
 #For NCBI-Genbank, where POR is the 3 letter accession. You may want to remove all commas too - add sed 's/,//g'
-cat Tolpar.fas | sed 's/ \[Tolypocladium paradoxum\]//g' | sed 's/POR/Tolpar|POR/g' | sed 's/ /_/g' > Tolpar.names.fas
+cat Tolpar.fas | sed 's/ \[Tolypocladium paradoxum\]//g' | sed 's/POR/Tolpar|POR/g' | sed 's/ /_/g' | sed 's/,//g' > Tolpar.names.fas
 
 #Example output of headers in reformatted file:
 
