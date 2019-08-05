@@ -40,8 +40,12 @@ perl ./src_proteinortho_grab_proteins.pl -exact -tofiles new_all_18.tsv Botbo.fa
 
 #IF this starts to take to long running on command line, then use poh_grab_prots_slurm.sh to run via the queue. Longest it took me was ~5 hours.
 #Your output should be individual files equal to the number of single copy orthogroups. They are named like this:
+OrthoGroup###.fasta
 
-OrthoGroup###.fas
+####Move new Orthogroup files to new directory
+mkdir Single_copy
+mv *.fasta Single_copy/.
+cd Single_copy/
 
 4. Run muscle on all files using Load Balancer:
 #Create lb file
@@ -61,6 +65,9 @@ cd muscleout/
 
 #Prepare and run your slurm
 sbatch LB_trimal_slurm.sh
+
+mkdir trimmed
+mv *.out.trim trimmed/.
 
 6. Create expected file:
 cat trimmed/*.fasta.out.trim | grep "^>" | tr "|" "\t" | cut -f 1 | sort | uniq > expected.txt
