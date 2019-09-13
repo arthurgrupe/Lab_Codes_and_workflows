@@ -17,7 +17,7 @@ cat Tolpar.fas | sed 's/ \[Tolypocladium paradoxum\]//g' | sed 's/>POR/>Tolpar|P
 cat Tolpar.names.fas | grep \>
 
 #>Tolpar|POR39802.1_Uncharacterized_protein_TPAR_00008
-#>Tolpar|POR39803.1_putative_PGM2-phosphoglucomutase,_major_isoform
+#>Tolpar|POR39803.1_putative_PGM2-phosphoglucomutase_major_isoform
 #>Tolpar|POR39804.1_Uncharacterized_protein_TPAR_00024
 #>Tolpar|POR39805.1_MFS-type_transporter
 #>Tolpar|POR39806.1_Uncharacterized_protein_TPAR_00026,_partial
