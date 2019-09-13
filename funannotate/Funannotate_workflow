@@ -33,3 +33,10 @@ funannotate predict -i masked_sorted_cleaned.fas --species "Botrytis cinerea" --
 #   -o name of output directory
 #   --cpus number of cpus to use
 
+4. Annotate
+
+#  Run IPRScan:
+
+
+
+5. Compare
