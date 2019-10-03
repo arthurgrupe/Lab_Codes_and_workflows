@@ -1,0 +1,6 @@
+remove_small_contigs.pl
+
+Purpose: removes small contigs from genome assembly
+
+Usage: perl remove_small_contigs.pl [min. length] input_file.fasta > output_file.fasta
+       min. length - minimum length of contigs. Contigs below this threshold will be removed from the assembly.
