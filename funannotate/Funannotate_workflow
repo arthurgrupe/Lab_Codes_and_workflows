@@ -41,13 +41,11 @@ interproscan.sh -i Nagfri_esom_prots_v2.fas -iprlookup -pa KEGG -b Nag_Fri_iprsc
 b) Run Phobius:
 phobius.pl -short Nagfri_esom_prots_v2.fas
 
-#Reformat phobius output if necessary
-
 c) Run Antismash:
 antismash -c 9 --taxon fungi Naganishia_friedmannii.gbk
 
 #Concatenate antismash results:
-cat cat Naganishia_friedmannii/Nagfri_1.cluster00* > Nagfri_antismash_clusters.gbk
+cat Naganishia_friedmannii/Nagfri_1.cluster00* > Nagfri_antismash_clusters.gbk
 
 d) Funannotate annotate
 funannotate annotate -i /scratch/summit/caqu8258/Crypto/funannotate_predict_v2/ -s "Naganishia friedmannii" --sbt ./Nagfri.sbt  --antismash ./All_clusters.gbk --phobius ./phobius.tab --iprscan ./Nag_Fri_iprscan_results.xml --busco_db /projects/caqu8258/software/local/bin/busco/Lineages/basidiomycota_odb9 -t "-l paired-ends"
