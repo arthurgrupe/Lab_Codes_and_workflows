@@ -51,3 +51,6 @@ d) Funannotate annotate
 funannotate annotate -i /scratch/summit/caqu8258/Crypto/funannotate_predict_v2/ -s "Naganishia friedmannii" --sbt ./Nagfri.sbt  --antismash ./All_clusters.gbk --phobius ./phobius.tab --iprscan ./Nag_Fri_iprscan_results.xml --busco_db /projects/caqu8258/software/local/bin/busco/Lineages/basidiomycota_odb9 -t "-l paired-ends"
 
 5. Compare - I could only every get this to work on the command line.
+
+funannotate compare -i Kwoniella_new.gbk Crypto_neo_new.gbk Exophaqua_new.gbk Moesanta_new.gbk Rhodo_torul_new.gbk Debary_hans_new.gbk rhodogramin_new.gbk Crypto_gattii_new.gbk Hortaea_wern.gbk Filo_wier_cheap.gbk Nag_fri_cheap.gbk -o fast_new_compare --cpus 2
+
