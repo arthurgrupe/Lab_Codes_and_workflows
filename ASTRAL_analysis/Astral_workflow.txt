@@ -2,4 +2,5 @@
 
 1. Create your individual gene trees
 #For input into ASTRAL, all genes used in a concatenated phylogenetic analysis need to be run individually through RAxML or whatever tree recon program you're using.
-#Use the Load balancer to run all of these jobs.
+#Use the Load balancer to run all of these jobs. 
+#NOTE: some characters left in some of the gene names could trip up RAxML. For example [ and ] may need to be removed and then raxml can be re-run. 
