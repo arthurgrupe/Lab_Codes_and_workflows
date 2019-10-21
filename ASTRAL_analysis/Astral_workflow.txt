@@ -1,8 +1,17 @@
 #By C. Alisha Quandt# 9/2019
 
-1. Create your individual gene trees
+1. Prepare individual gene trees
 #For input into ASTRAL, all genes used in a concatenated phylogenetic analysis need to be run individually through RAxML or whatever tree recon program you're using.
-#Use the Load balancer to run all of these jobs. 
+ 
 #You must rename all the fasta headers to be exactly the same across the alignments prior to runnign RAxML
-#For example:
-> New_OG55.fasta.out.trim
+#To do this to all of your input alignments, run:
+
+for filename in *.trim
+do
+    cat "${filename}" | awk -F "|" '{print $1}' > "${filename}.renamed"
+done
+
+2. Run RAxML on all renamed gene trees
+#Use the Load balancer to run all of these jobs.
+
+
