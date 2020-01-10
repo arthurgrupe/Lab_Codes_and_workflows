@@ -14,4 +14,13 @@ done
 2. Run RAxML on all renamed gene trees
 #Use the Load balancer to run all of these jobs.
 
+3. Concatenate all gene trees:
 
+cat RAxML_bipartitions.* > all_gene_trees.tree
+
+4. Run Astral
+
+#Load Java:
+ml jdk/1.8.0
+
+java -jar /projects/caqu8258/software/build/ASTRAL/Astral/astral.5.7.3.jar -i all_gene_trees.tree -o out.tree
