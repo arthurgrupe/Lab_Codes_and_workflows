@@ -84,7 +84,7 @@ NOTE: you may need to type out full path for this perl script to work if not in 
 
 ***Data may either be processed locally with Databionic ESOM or with Somoclu, then visualized with ESOM. Follow the ESOM workflow below when working with smaller datasets or when generating a smaller map size. Follow the Somoclu workflow for larger datasets or mapsize.***
 
-***ESOM training (local processing) workflow start:***
+***-----ESOM training (local processing) workflow start-----***
 
 8a. Copy your 4 output files to the Mac.
 
@@ -104,15 +104,16 @@ Tools -> training.  I use default options, except:
 
 8c. Hit start - training will take minutes to hours (more common) depending on the size of your dataset.
 
-***ESOM training (local processing) workflow end:***
+***-----ESOM training (local processing) workflow end-----***
 
-***Using Somoclu is beneficial when you have a large dataset as this can be time and resource-consuming when running locally.**
-#Somoclu can be installed here: https://somoclu.readthedocs.io/en/stable/download.html
 
-***Somoclu training workflow start:***
+***-----Somoclu training workflow start-----***
+Somoclu is beneficial when you have a large dataset as this can be time and resource-consuming when running locally.
+It can be installed here: https://somoclu.readthedocs.io/en/stable/download.html
+
 
 8a. Train your ESOM
-#This will reproduce the same parameters specified above for ESOM. 
+This will reproduce the same parameters specified above for ESOM and output .bm, .names, .umx, and .wts files. 
 
 ```
 source ~/.somoclurc
@@ -127,12 +128,11 @@ source ~/.somoclurc
 #y = number of rows in map 
 #v = verbosity level (gives progress/status in output file)
 
-#This will output .bm, .names, .umx, and .wts files. 
-***Somoclu will number the the .lrn file starting at 1 and the .bm file starting at 0. If you use them as is in ESOM, you will get a message about mismatches in observations when you run the "Getclassfasta" script on your generated .cls file. Renumber the .bm file starting with 1 before importing into ESOM.****
+***Somoclu will number the the .lrn file starting at 1 and the .bm file starting at 0. If you use them as is in ESOM, you will get a message about mismatches in observations when you run the "Getclassfasta" script on your generated .cls file. Renumber the .bm file starting with 1 before importing into ESOM.***
 
 8b.  Load your .names, .umx, .wts, and fixed .bm file into your local ESOM gui. 
 
-***Somoclu training workflow end:***
+***-----Somoclu training workflow end-----***
 
 9. Vizualize output and identify target genome
 
@@ -140,7 +140,7 @@ View -> UMatrix background, tiled display.
 #Use Zoom, Color, Bestmatch size to get your desired view.
 
 *****At this point only your ridges and valleys and the overall structure of your data will be displayed.***** 
-#NOW, we can play around with adding information (annotating, if you will) those contigs (windows) that are displayed on your map.
+NOW, we can play around with adding information (annotating, if you will) those contigs (windows) that are displayed on your map.
  A. Check "Draw Best Matches" in View pane.
 
  B. File -> load .cls
