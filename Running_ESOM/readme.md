@@ -1,8 +1,8 @@
-Visualize your data - create an emergent self organizing map (ESOM).
-#Modified and emended from the work out of Jill Banfield's lab. Greg Dick et al. 2009 Genome Biology. And Vincent Denef's version of the print_tetramer_freqs.pl perl script has been used.
-#Example files and necessary scripts included in this folder as well (.lrn file was too big, so I had to gzip it!).
+Visualize your data - create an emergent self organizing map (ESOM).  
 
-#Your input is the scaffolds.fasta file from your SPAdes output. 
+Modified and emended from the work out of Jill Banfield's lab. Greg Dick et al. 2009 Genome Biology. And Vincent Denef's version of the print_tetramer_freqs.pl perl script has been used. Example files and necessary scripts included in this folder as well (.lrn file was too big, so I had to gzip it!).  
+
+Your input is the scaffolds.fasta file from your SPAdes output.   
 
 1. Remove small contigs from your input assembly. Contigs below 300 - 1000bp can be removed. We start with 300 and increase the minimum threshold size as needed.
 
@@ -35,7 +35,7 @@ python new_ncbi_tax_report_test.py best_species_300bp_to_ntdb_E5_blast.out -o be
 
 5. Using the taxonomy assignment, bin contigs manually. Reformat to the "annotation" format taken by ESOM and save it as a plain text file: species_300bp_metagenome.annotation
 
-#Here is an example of the top few lines of the annotation file, species_300bp_metagenome.annotation:
+Here is an example of the top few lines of the annotation file, species_300bp_metagenome.annotation:
 ```
 contig  annotation
 NODE_1147_length_2667_cov_16.2489	10
@@ -84,7 +84,7 @@ NOTE: you may need to type out full path for this perl script to work if not in 
 
 ***Data may either be processed locally with Databionic ESOM or with Somoclu, then visualized with ESOM. Follow the ESOM workflow below when working with smaller datasets or when generating a smaller map size. Follow the Somoclu workflow for larger datasets or mapsize.***
 
-***---------------ESOM training (local processing) workflow start----------------***
+***---------------ESOM training (local processing) workflow START----------------***
 
 8a. Copy your 4 output files to the Mac.
 
@@ -104,10 +104,10 @@ Tools -> training.  I use default options, except:
 
 8c. Hit start - training will take minutes to hours (more common) depending on the size of your dataset.
 
-***---------------ESOM training (local processing) workflow end---------------***
+***---------------ESOM training (local processing) workflow END---------------***
 
 
-***---------------Somoclu training workflow start---------------***
+***---------------Somoclu training workflow START---------------***
 Somoclu is advantageous when you have a large dataset as this can be time and resource-consuming when running locally.
 It can be installed here: https://somoclu.readthedocs.io/en/stable/download.html
 
@@ -118,7 +118,6 @@ This will reproduce the same parameters specified above for ESOM and output .bm,
 ```
 source ~/.somoclurc
 /projects/chjo1591/software/build/somoclu-master/src/somoclu -e 20 -l 0.5 -L 0.1 -m toroid -r 50 -x 250 -y 200 -v 2 species_300bp.fasta.lrn species_300bp_spades.fasta
-
 
 #e = number of epochs
 #l = starting learning rate 
@@ -134,15 +133,16 @@ source ~/.somoclurc
 
 8b.  Load your .names, .umx, .wts, and fixed .bm file into your local ESOM gui. 
 
-***---------------Somoclu training workflow end---------------***
+***---------------Somoclu training workflow END---------------***
 
 9. Vizualize output and identify target genome
 
 View -> UMatrix background, tiled display.
 Use Zoom, Color, Bestmatch size to get your desired view.
 
-***At this point only your ridges and valleys and the overall structure of your data will be displayed.***
+***At this point only your ridges and valleys and the overall structure of your data will be displayed.***  
 NOW, we can play around with adding information (annotating, if you will) those contigs (windows) that are displayed on your map.
+
  A. Check "Draw Best Matches" in View pane.
 
  B. File -> load .cls
