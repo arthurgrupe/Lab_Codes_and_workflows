@@ -6,9 +6,11 @@ Visualize your data - create an emergent self organizing map (ESOM).
 
 1. Remove small contigs from your input assembly. Contigs below 300 - 1000bp can be removed. We start with 300 and increase the minimum threshold size as needed.
 
-```module purge
+```
+module purge
 module load perl/5.24.0
-perl remove_small_contigs.pl 300 scaffolds.fasta > species_300bp_spades.fasta```
+perl remove_small_contigs.pl 300 scaffolds.fasta > species_300bp_spades.fasta
+```
 
 2. Using blastn create a best blast hit for each contig. Use tabular format (6) for blast output. This takes about 4-18 hours. 
 
