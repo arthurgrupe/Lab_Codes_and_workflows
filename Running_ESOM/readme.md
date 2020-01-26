@@ -71,15 +71,13 @@ Example of the key for your annotation:
 
 ```
 perl print_tetramer_freqs_esom.pl -s species_300bp_spades.fasta -m 300 -w 3000 -k 4 -a species_300bp_metagenome.annotation
-```
-NOTE: you may need to type out full path for this perl script to work if not in same directory.
 
 #s = your assembly
 #m = minimum contig size to be analyzed (make this higher for faster/ less CPU intensive visualization)
 #w = window size to calculate kmer frequency (again, make this higher for faster viz)
 #k = kmer size, default is 4, longer means slower!
 #a = annotation file (tab delimited plain text) you generated (either from Blast taxonomy report as above, or other info e.g. coverage, RNASeq data)
-
+```
 7. Output, 4 files: .lrn, .names, .cls, .annotation files within your directory. 
 
 ***Data may either be processed locally with Databionic ESOM or with Somoclu, then visualized with ESOM. Follow the ESOM workflow below when working with smaller datasets or when generating a smaller map size. Follow the Somoclu workflow for larger datasets or mapsize.***
@@ -95,12 +93,12 @@ This works on Mac and Linux machines, but we have not had success on Windows yet
 
 File -> load .lrn, then load .names, then load .cls
 
-Tools -> training.  I use default options, except: 
-   Training algorithm - K-batch
-   Number of rows in map - 200
-   Number of cols in map - 250 (product of rows x cols should be approximately 5-6x the # of windows, e.g. I have a 30,000,000 bp assembly, divide by 3000 [size of window] ) 
-   Start value for the radius - 50
-   Number of epochs - 20
+Tools -> training.  I use default options, except:  
+Training algorithm - K-batch  
+   Number of rows in map - 200  
+   Number of cols in map - 250 (product of rows x cols should be approximately 5-6x the # of windows, e.g. I have a 30,000,000 bp assembly, divide by 3000 [size of window] )   
+   Start value for the radius - 50  
+   Number of epochs - 20  
 
 8c. Hit start - training will take minutes to hours (more common) depending on the size of your dataset.
 
