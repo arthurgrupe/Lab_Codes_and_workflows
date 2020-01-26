@@ -18,7 +18,7 @@ perl remove_small_contigs.pl 300 scaffolds.fasta > species_300bp_spades.fasta
 blastn -query species_300bp_spades.fasta -db /pl/active/fungi1/blastdb_nt/nt -out species_300bp_to_ntdb_E5 -max_target_seqs 1 -evalue 1e-5 -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore staxids" -num_threads 12
 ```
 
-#Talk about quick and dirty. Your best blastn hit could be spurious or as equally likely as the second or fourth best blastn hit, but in aggregate, we try to separate the data. For bacteria, this actually works quite well, for Eukaryotes the databases are sparser and therefore we give a best blastn hit less meaning. A top hit to ANY fungus is usually a definite for our targets, a top hit to animals (especially inverts) could still be fungal target though. I see this frequently.
+Talk about quick and dirty. Your best blastn hit could be spurious or as equally likely as the second or fourth best blastn hit, but in aggregate, we try to separate the data. For bacteria, this actually works quite well, for Eukaryotes the databases are sparser and therefore we give a best blastn hit less meaning. A top hit to ANY fungus is usually a definite for our targets, a top hit to animals (especially inverts) could still be fungal target though. I see this frequently.
 
 3. Multiple hits will be assigned to each contig, filter the results so only a "best" blast hit is assigned.
 
@@ -26,16 +26,16 @@ blastn -query species_300bp_spades.fasta -db /pl/active/fungi1/blastdb_nt/nt -ou
 perl best_blast_hit.pl species_300bp_to_ntdb_E5_blast.out > best_species_300bp_to_ntdb_E5_blast.out 
 ```
 
-4. Assign taxonomy based on the best blast hit.
+4. Assign taxonomy based on the best blast hit. This takes about 5-24 hours.
 
 ```
 source ~/.kevinrc
 python new_ncbi_tax_report_test.py best_species_300bp_to_ntdb_E5_blast.out -o best_species_300bp_to_ntdb_E5_taxreport
 ```
 
-5. Using the taxonomy assignment, bin contigs manually. Reformat to the "annotation" format taken by ESOM and save it as a plain text file: your_metagenome.annotation
+5. Using the taxonomy assignment, bin contigs manually. Reformat to the "annotation" format taken by ESOM and save it as a plain text file: species_300bp_metagenome.annotation
 
-#Here is an example of the top few lines of the annotation file, your_metagenome.annotation:
+#Here is an example of the top few lines of the annotation file, species_300bp_metagenome.annotation:
 ```
 contig  annotation
 NODE_1147_length_2667_cov_16.2489	10
@@ -70,25 +70,25 @@ Example of the key for your annotation:
 6. Generate input files for ESOM.
 
 ```
-perl print_tetramer_freqs_esom.pl -s species_300bp_spades.fasta -m 300 -w 3000 -k 4 -a species_metagenome.annotation
+perl print_tetramer_freqs_esom.pl -s species_300bp_spades.fasta -m 300 -w 3000 -k 4 -a species_300bp_metagenome.annotation
 ```
+NOTE: you may need to type out full path for this perl script to work if not in same directory.
 
 #s = your assembly
 #m = minimum contig size to be analyzed (make this higher for faster/ less CPU intensive visualization)
 #w = window size to calculate kmer frequency (again, make this higher for faster viz)
 #k = kmer size, default is 4, longer means slower!
 #a = annotation file (tab delimited plain text) you generated (either from Blast taxonomy report as above, or other info e.g. coverage, RNASeq data)
-NOTE: you may need to type out full path for this perl script to work if not in same directory.
 
 7. Output, 4 files: .lrn, .names, .cls, .annotation files within your directory. 
 
 ***Data may either be processed locally with Databionic ESOM or with Somoclu, then visualized with ESOM. Follow the ESOM workflow below when working with smaller datasets or when generating a smaller map size. Follow the Somoclu workflow for larger datasets or mapsize.***
 
-***-----ESOM training (local processing) workflow start-----***
+***---------------ESOM training (local processing) workflow start----------------***
 
 8a. Copy your 4 output files to the Mac.
 
-#ESOM GUI can be installed here : http://databionic-esom.sourceforge.net/
+ESOM GUI can be installed here : http://databionic-esom.sourceforge.net/
 This works on Mac and Linux machines, but we have not had success on Windows yet.
 
 8b. Load files into ESOM gui:
@@ -104,11 +104,11 @@ Tools -> training.  I use default options, except:
 
 8c. Hit start - training will take minutes to hours (more common) depending on the size of your dataset.
 
-***-----ESOM training (local processing) workflow end-----***
+***---------------ESOM training (local processing) workflow end---------------***
 
 
-***-----Somoclu training workflow start-----***
-Somoclu is beneficial when you have a large dataset as this can be time and resource-consuming when running locally.
+***---------------Somoclu training workflow start---------------***
+Somoclu is advantageous when you have a large dataset as this can be time and resource-consuming when running locally.
 It can be installed here: https://somoclu.readthedocs.io/en/stable/download.html
 
 
@@ -117,8 +117,9 @@ This will reproduce the same parameters specified above for ESOM and output .bm,
 
 ```
 source ~/.somoclurc
-/projects/chjo1591/software/build/somoclu-master/src/somoclu -e 20 -l 0.5 -L 0.1 -m toroid -r 50 -x 250 -y 200 -v 2 species_300bp.fasta.lrn species_300bp.fasta
-```
+/projects/chjo1591/software/build/somoclu-master/src/somoclu -e 20 -l 0.5 -L 0.1 -m toroid -r 50 -x 250 -y 200 -v 2 species_300bp.fasta.lrn species_300bp_spades.fasta
+
+
 #e = number of epochs
 #l = starting learning rate 
 #L = finishing learning rate
@@ -127,19 +128,20 @@ source ~/.somoclurc
 #x = number of columns in map 
 #y = number of rows in map 
 #v = verbosity level (gives progress/status in output file)
+```
 
 ***Somoclu will number the the .lrn file starting at 1 and the .bm file starting at 0. If you use them as is in ESOM, you will get a message about mismatches in observations when you run the "Getclassfasta" script on your generated .cls file. Renumber the .bm file starting with 1 before importing into ESOM.***
 
 8b.  Load your .names, .umx, .wts, and fixed .bm file into your local ESOM gui. 
 
-***-----Somoclu training workflow end-----***
+***---------------Somoclu training workflow end---------------***
 
 9. Vizualize output and identify target genome
 
 View -> UMatrix background, tiled display.
-#Use Zoom, Color, Bestmatch size to get your desired view.
+Use Zoom, Color, Bestmatch size to get your desired view.
 
-*****At this point only your ridges and valleys and the overall structure of your data will be displayed.***** 
+***At this point only your ridges and valleys and the overall structure of your data will be displayed.***
 NOW, we can play around with adding information (annotating, if you will) those contigs (windows) that are displayed on your map.
  A. Check "Draw Best Matches" in View pane.
 
@@ -155,10 +157,10 @@ NOW, we can play around with adding information (annotating, if you will) those 
  
 10. Obtain your target contigs using Getclassfasta.pl
 ```
-perl Getclassfasta.pl -fasta your_genome_assembly.fasta -names your_genome_assembly.names -num 1 -loyal 75 -cls your_target_from_esom.cls
+perl Getclassfasta.pl -fasta species_300bp_spades.fasta -names species_300bp_spades.fasta.names -num 1 -loyal 75 -cls species_300bp_spades.fasta.cls
 ```
-#You will now have a .fasta (your new target genome assembly), and a .conf output files. The .conf tells you the confidence at which any given contig was placed within the target genome assembly.
+You will now have a .fasta (your new target genome assembly), and a .conf output files. The .conf tells you the confidence at which any given contig was placed within the target genome assembly.
 
-Congratulations, you can now move on with genome annotation.
+Congratulations, you can now move on with genome annotation!
 
 
