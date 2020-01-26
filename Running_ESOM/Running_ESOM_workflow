@@ -2,11 +2,27 @@ Visualize your data - create an emergent self organizing map (ESOM).
 #Modified and emended from the work out of Jill Banfield's lab. Greg Dick et al. 2009 Genome Biology. And Vincent Denef's version of the print_tetramer_freqs.pl perl script has been used.
 #Example files and necessary scripts included in this folder as well (.lrn file was too big, so I had to gzip it!).
 
-On the command line:
-1. Using blastn or USEARCH, an algorithm, and Genbank nt or similar, a database, create a best blast hit for each contig. Use tabular format (6) for blast output.
+#Your input is the scaffolds.fasta file from your SPAdes output. 
+
+1. Remove small contigs from your input assembly. Contigs below 300 - 1000bp can be removed. We start with 300 and increase the minimum threshold size as needed.
+
+```module purge
+module load perl/5.24.0
+perl remove_small_contigs.pl 300 scaffolds.fasta > species_300bp_spades.fasta```
+
+2. Using blastn create a best blast hit for each contig. Use tabular format (6) for blast output. This takes about 4-18 hours. 
+
+blastn -query species_300bp_spades.fasta -db /pl/active/fungi1/blastdb_nt/nt -out species_300bp_to_ntdb_E5 -max_target_seqs 1 -evalue 1e-5 -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore staxids" -num_threads 12
+
 #Talk about quick and dirty. Your best blastn hit could be spurious or as equally likely as the second or fourth best blastn hit, but in aggregate, we try to separate the data. For bacteria, this actually works quite well, for Eukaryotes the databases are sparser and therefore we give a best blastn hit less meaning. A top hit to ANY fungus is usually a definite for our targets, a top hit to animals (especially inverts) could still be fungal target though. I see this frequently.
 
+3. Multiple hits will be assigned to each contig, filter the 
+
+
 #Now we have to "assign the taxonomy" based on this best blast hit.
+
+
+
 #Tina add BLAST parameters and example command for running Kevin's method of taxonomy report extraction.
 
 In a spreadsheet:
@@ -43,7 +59,13 @@ perl print_tetramer_freqs_esom.pl -s your_genome_assembly.fasta -m 1000 -w 3000 
 #a = annotation file (tab delimited plain text) you generated (either from Blast taxonomy report as above, or other info e.g. coverage, RNASeq data)
 NOTE: you may need to type out full path for this perl script to work if not in same directory.
 
-Output, 4 files: .lrn, .names, .cls, .annotation files within your directory. Copy these to the Mac.
+Output, 4 files: .lrn, .names, .cls, .annotation files within your directory. 
+
+#Data may either be processed locally with Databionic ESOM or with Somoclu, then visualized with ESOM. Follow the ESOM workflow below when working with smaller datasets or when generating a smaller map size. Follow the Somoclu workflow for larger datasets or mapsize.
+
+*******ESOM (local processing) workflow start:*******
+
+Copy your 4 output files to the Mac.
 
 On a Mac, install the GUI from here: http://databionic-esom.sourceforge.net/
 
@@ -59,6 +81,16 @@ Tools -> training.  I use default options, except:
    Number of epochs - 20
 
 Hit start - training will take minutes to hours (more common) depending on the size of your dataset.
+
+*******ESOM (local processing) workflow end:*******
+
+#Using Somoclu is beneficial when you have a large dataset as this can be time and resource-consuming when running locally.
+
+******Somoclu workflow start:*******
+3. 
+source ~/.somoclurc
+
+
 
 4. Vizualize output and identify target genome
 
