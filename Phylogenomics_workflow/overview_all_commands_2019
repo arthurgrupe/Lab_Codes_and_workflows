@@ -86,7 +86,8 @@ head expected.txt
 
 7. Now, concatenate your aligned files:
 module load perl
-*****It is imperative that you load perl first, otherwise you will get an error. The default perl doesn't work with this program.*****
+#####It is imperative that you load perl first, otherwise you will get an error. The default perl doesn't work with this program.#####
+
 perl ./combine_fasaln_v2019.pl -o allseqs.fas -of fasta -d ./trimmed/ --expected expected.txt
 
 ###Make new directory, move alignment to that directory
