@@ -14,6 +14,15 @@ done
 2. Run RAxML on all renamed gene trees
 #Use the Load balancer to run all of these jobs.
 
+create_Raxml.sh > lb_cmd_raxml
+
+head lb_cmd_raxml
+#mpirun -np 19  raxmlHPC-MPI-AVX2 -f a -s all49.tsv.OrthoGroup0.fasta.out.trim.renamed -n all49.tsv.OrthoGroup0.fasta.out.trim.renamed_raxml_v1_100bp -m PROTGAMMAAUTO -x 3248 -N 100 -p 2964
+#mpirun -np 19  raxmlHPC-MPI-AVX2 -f a -s all49.tsv.OrthoGroup100.fasta.out.trim.renamed -n all49.tsv.OrthoGroup100.fasta.out.trim.renamed_raxml_v1_100bp -m PROTGAMMAAUTO -x 3248 -N 100 -p 2964
+#mpirun -np 19  raxmlHPC-MPI-AVX2 -f a -s all49.tsv.OrthoGroup101.fasta.out.trim.renamed -n all49.tsv.OrthoGroup101.fasta.out.trim.renamed_raxml_v1_100bp -m PROTGAMMAAUTO -x 3248 -N 100 -p 2964
+
+sbatch LB_raxml_slurm.sh
+
 3. Concatenate all gene trees:
 
 cat RAxML_bipartitions.* > all_gene_trees.tree
