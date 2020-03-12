@@ -7,7 +7,8 @@ source ~/.funrc
 
 1.  Sort
 
-funannotate sort -i your_assembly.fas -o sorted_clean.fas -b Micruf (--minlen 500)
+funannotate sort -i your_assembly.fas -o sorted_clean.fas -b Micruf --minlen 500
+
 
 #   -i your genome assembly
 #   -o name of output file
