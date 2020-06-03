@@ -56,7 +56,7 @@ sbatch LB_muscle_slurm.sh
 
 ####Move .out files to new directory
 mkdir muscleout
-mv *.out muscleout/.
+mv *.fasta.out muscleout/.
 cd muscleout/
 
 5. Run trimal using Load Balancer:
