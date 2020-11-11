@@ -9,8 +9,8 @@ cat Micruf.fas | sed 's/>g/>Micruf|g/g' > Micruf.names.fas
 #For Funannotate/Maker proteins:
 cat Nagfri_prots.fas | sed 's/>NAGFRI_/>NAGFRI|g/g' > Nagfri.names.fas
 
-#For NCBI-Genbank (THE MOST DIFFICULT), where POR is the 3 letter accession. You may want to remove all commas, forward slashes, and parentheses too - add sed 's/,//g' | sed 's/\///g' | sed 's/(//g' | sed 's/)//g'
-cat Tolpar.fas | sed 's/ \[Tolypocladium paradoxum\]//g' | sed 's/>POR/>Tolpar|POR/g' | sed 's/ /_/g' | sed 's/,//g' | sed 's/\///g' | sed 's/(//g' | sed 's/)//g' > Tolpar.names.fas
+#For NCBI-Genbank (THE MOST DIFFICULT), where POR is the 3 letter accession. You may want to remove all commas, forward slashes, parentheses, and brackets too - add sed 's/,//g' | sed 's/\///g' | sed 's/(//g' | sed 's/)//g'
+cat Tolpar.fas | sed 's/ \[Tolypocladium paradoxum\]//g' | sed 's/>POR/>Tolpar|POR/g' | sed 's/ /_/g' | sed 's/,//g' | sed 's/\///g' | sed 's/(//g' | sed 's/)//g' | sed 's/[][]//g' > Tolpar.names.fas
 
 #Example output of headers in reformatted file:
 
